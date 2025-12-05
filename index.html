@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Emmi - The Cutest Giiirl Around!</title>
+  <style>
+    /* Animated, groovy gradient background with a custom cursor */
+    body {
+      background: linear-gradient(45deg, #ff66cc, #66ccff, #ffcc66, #ff66cc);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      font-family: "Comic Sans MS", cursive, sans-serif;
+      color: #000080;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      position: relative;
+      overflow-x: hidden; /* Only hide horizontal scrolling */
+      overflow-y: auto;   /* Allow vertical scrolling */
+      cursor: url('emmi-cursor-small.png'), auto;  /* Custom cursor using Emmi's image */
+    }
+    
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
+    /* Header styling with a neon glow effect */
+    h1 {
+      font-size: 3em;
+      margin: 20px 0;
+      text-shadow: 2px 2px #ff0000;
+    }
+    
+    /* Blinking text effect */
+    .blink {
+      font-size: 1.5em;
+      animation: blinker 1s linear infinite;
+    }
+    @keyframes blinker {
+      50% { opacity: 0; }
+    }
+    
+    /* Marquee style for scrolling text */
+    .marquee {
+      background-color: #ffff00;
+      overflow: hidden;
+      position: relative;
+      color: #000;
+      font-weight: bold;
+      padding: 10px 0;
+    }
+    .marquee p {
+      position: absolute;
+      width: 100%;
+      animation: marquee 8s linear infinite;
+      white-space: nowrap;
+    }
+    @keyframes marquee {
+      0% { left: 100%; }
+      100% { left: -100%; }
+    }
+    
+    /* Gallery styling for Emmi’s pictures */
+    .img-gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 20px;
+    }
+    .img-gallery img {
+      width: 200px;
+      height: auto;
+      margin: 10px;
+      border: 5px dotted #0000ff;
+      box-shadow: 3px 3px 5px rgba(0,0,0,0.5);
+    }
+    
+    /* Existing Quote Section: Emmi Speaks */
+    .quote-section {
+      background-color: #fff8dc;
+      border: 2px dashed #ff4500;
+      margin: 20px auto;
+      padding: 15px;
+      width: 80%;
+      max-width: 600px;
+      font-size: 1.2em;
+      animation: pulse 3s infinite;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    .quote-section blockquote {
+      margin: 10px 0;
+      font-style: italic;
+      color: #800000;
+    }
+    
+    /* Additional Funny Sections Styling */
+    .funny-section {
+      background-color: #e0ffff;
+      border: 2px solid #ff69b4;
+      margin: 20px auto;
+      padding: 15px;
+      width: 80%;
+      max-width: 600px;
+      font-size: 1.1em;
+      animation: slideIn 2s ease-out;
+    }
+    @keyframes slideIn {
+      from { transform: translateX(-100%); }
+      to { transform: translateX(0); }
+    }
+    .funny-section h2 {
+      margin-bottom: 10px;
+      color: #ff1493;
+    }
+    .funny-section p, .funny-section ul {
+      text-align: left;
+    }
+    .funny-section ul {
+      list-style: square;
+      padding-left: 20px;
+    }
+    
+    /* Floating cat element animation */
+    .floating-cat {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      z-index: 10;
+      animation: floatAround 6s ease-in-out infinite;
+    }
+    @keyframes floatAround {
+      0%   { top: 80%; left: 10%; transform: rotate(0deg); }
+      25%  { top: 20%; left: 70%; transform: rotate(45deg); }
+      50%  { top: 60%; left: 50%; transform: rotate(90deg); }
+      75%  { top: 10%; left: 20%; transform: rotate(135deg); }
+      100% { top: 80%; left: 10%; transform: rotate(180deg); }
+    }
+    
+    /* Extra animated funky shape for extra flair */
+    .funky-shape {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      background-color: #ff00ff;
+      border-radius: 50%;
+      opacity: 0.7;
+      animation: moveAround 10s linear infinite;
+    }
+    @keyframes moveAround {
+      0%   { top: 0; left: 0; }
+      25%  { top: 0; left: 90%; }
+      50%  { top: 80%; left: 90%; }
+      75%  { top: 80%; left: 0; }
+      100% { top: 0; left: 0; }
+    }
+    
+    /* Footer styling */
+    .footer {
+      background-color: #333;
+      color: #fff;
+      padding: 10px;
+      font-size: 0.8em;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Welcome to Emmi's Wacky World!</h1>
+  <p class="blink">emmi spelled backwards is still imme!</p>
+  <div class="marquee">
+    <p>Keep it funky, keep it cool, Emmi rules all around!</p>
+  </div>
+  
+  <h2>Meet Emmi</h2>
+  <div class="img-gallery">
+    <!-- Replace these src attributes with your actual image file names -->
+    <img src="emmi-1.jpg" alt="Emmi Picture 1">
+    <img src="emmi-2.jpg" alt="Emmi Picture 2">
+    <img src="emmi-3.jpg" alt="Emmi Picture 3">
+    <img src="emmi-4.jpg" alt="Emmi Picture 4">
+    <img src="emmi-5.jpg" alt="Emmi Picture 5">
+    <img src="emmi-6.jpg" alt="Emmi Picture 6">
+    <img src="emmi-7.jpg" alt="Emmi Picture 7">
+    <img src="emmi-8.jpg" alt="Emmi Picture 8">
+    <img src="emmi-9.jpg" alt="Emmi Picture 9">
+    <img src="emmi-10.jpg" alt="Emmi Picture 10">
+  </div>
+  
+  <!-- Existing Quote Section: Emmi Speaks -->
+  <div class="quote-section">
+    <h2>Emmi Speaks</h2>
+    <blockquote>"I didn't choose the nap life; the nap life chose me!"</blockquote>
+  </div>
+  
+  <!-- New Funny Section: Emmi's Diary -->
+  <div class="funny-section">
+    <h2>Emmi's Diary</h2>
+    <p><strong>Dear Diary:</strong> Today I knocked over a vase—though I swear it was the mischievous wind's fault! I demand extra treats as compensation.</p>
+  </div>
+  
+  <!-- New Funny Section: Kitty Confessions -->
+  <div class="funny-section">
+    <h2>Kitty Confessions</h2>
+    <ul>
+      <li>"I once locked myself in a closet—oops, discovered a new nap zone!"</li>
+      <li>"That red dot? My archenemy, yet I just can’t resist chasing it!"</li>
+      <li>"I pretend not to hear my name just to keep life mysterious."</li>
+    </ul>
+  </div>
+  
+  <!-- Floating Emmi element (animated to move around the page) -->
+  <img src="emmi.png" class="floating-cat" alt="Floating Emmi">
+  
+  <!-- Extra animated funky shape for extra flair -->
+  <div class="funky-shape"></div>
+  
+  <div class="footer">
+    <p>&copy; 2025 Emmi. All rights reserved.</p>
+  </div>
+</body>
+</html>
+
