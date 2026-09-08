@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Emmi - The Cutest Giiirl Around!</title>
   <style>
     /* Animated, groovy gradient background with a custom cursor */
@@ -13,7 +14,9 @@
       color: #000080;
       text-align: center;
       margin: 0;
-      padding: 0;
+      padding: 0 0 calc(80px + env(safe-area-inset-bottom));
+      min-height: 100vh;
+      box-sizing: border-box;
       position: relative;
       overflow-x: hidden; /* Only hide horizontal scrolling */
       overflow-y: auto;   /* Allow vertical scrolling */
@@ -62,68 +65,73 @@
       100% { left: -100%; }
     }
     
-    /* Gallery styling for Emmi’s pictures */
+    /* A pile of colorful snapshots, with room to peek at every photo. */
     .img-gallery {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      padding: 20px;
+      align-items: center;
+      gap: 12px 0;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 35px 35px 60px;
+      isolation: isolate;
     }
     .img-gallery img {
-      width: 200px;
+      --tilt: -8deg;
+      --offset: 0px;
+      --paper: #ffff00;
+      position: relative;
+      width: 220px;
       height: auto;
-      margin: 10px;
-      border: 5px dotted #0000ff;
-      box-shadow: 3px 3px 5px rgba(0,0,0,0.5);
+      box-sizing: border-box;
+      margin: 8px -5px;
+      border: 9px solid var(--paper);
+      border-bottom-width: 28px;
+      background: var(--paper);
+      box-shadow: 5px 7px 0 #000080, 9px 13px 15px #00000040;
+      transform: translateY(var(--offset)) rotate(var(--tilt));
+      transition: transform 180ms ease, box-shadow 180ms ease;
     }
-    
-    /* Existing Quote Section: Emmi Speaks */
-    .quote-section {
-      background-color: #fff8dc;
-      border: 2px dashed #ff4500;
-      margin: 20px auto;
-      padding: 15px;
-      width: 80%;
-      max-width: 600px;
-      font-size: 1.2em;
-      animation: pulse 3s infinite;
+    .img-gallery img:nth-child(5n + 2) {
+      --tilt: 10deg;
+      --offset: 18px;
+      --paper: #ff66cc;
+      width: 190px;
     }
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-      100% { transform: scale(1); }
+    .img-gallery img:nth-child(5n + 3) {
+      --tilt: -4deg;
+      --offset: -12px;
+      --paper: #66ccff;
+      width: 260px;
     }
-    .quote-section blockquote {
-      margin: 10px 0;
-      font-style: italic;
-      color: #800000;
+    .img-gallery img:nth-child(5n + 4) {
+      --tilt: 13deg;
+      --offset: 22px;
+      --paper: #ffcc66;
+      width: 205px;
     }
-    
-    /* Additional Funny Sections Styling */
-    .funny-section {
-      background-color: #e0ffff;
-      border: 2px solid #ff69b4;
-      margin: 20px auto;
-      padding: 15px;
-      width: 80%;
-      max-width: 600px;
-      font-size: 1.1em;
-      animation: slideIn 2s ease-out;
+    .img-gallery img:nth-child(5n) {
+      --tilt: -12deg;
+      --paper: #fff;
+      width: 240px;
     }
-    @keyframes slideIn {
-      from { transform: translateX(-100%); }
-      to { transform: translateX(0); }
+    @media (hover: hover) {
+      .img-gallery img:hover {
+        z-index: 2;
+        transform: translateY(-12px) rotate(0deg) scale(1.08);
+        box-shadow: 7px 10px 0 #000080, 12px 18px 20px #00000040;
+      }
     }
-    .funny-section h2 {
-      margin-bottom: 10px;
-      color: #ff1493;
-    }
-    .funny-section p, .funny-section ul {
-      text-align: left;
-    }
-    .funny-section ul {
-      list-style: square;
-      padding-left: 20px;
+    @media (max-width: 600px) {
+      h1 { font-size: 2.2em; padding: 0 12px; }
+      .img-gallery { padding: 25px 25px 45px; gap: 20px 0; }
+      .img-gallery img:nth-child(n) {
+        width: 48%;
+        margin: 5px 0;
+        border-width: 5px;
+        border-bottom-width: 18px;
+      }
     }
     
     /* Floating cat element animation */
@@ -131,7 +139,9 @@
       position: absolute;
       width: 100px;
       height: 100px;
+      object-fit: cover;
       z-index: 10;
+      pointer-events: none;
       animation: floatAround 6s ease-in-out infinite;
     }
     @keyframes floatAround {
@@ -144,6 +154,7 @@
     
     /* Extra animated funky shape for extra flair */
     .funky-shape {
+      pointer-events: none;
       position: absolute;
       width: 50px;
       height: 50px;
@@ -162,11 +173,22 @@
     
     /* Footer styling */
     .footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 20;
       background-color: #333;
       color: #fff;
-      padding: 10px;
+      padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
       font-size: 0.8em;
-      margin-top: 20px;
+    }
+    .footer p { margin: 0; line-height: 1.5; }
+    @media (prefers-reduced-motion: reduce) {
+      /* Keep the two floating decorations moving; reduce the other effects. */
+      body, .blink, .marquee p { animation: none; }
+      .img-gallery img { transition: none; }
+      .marquee p { position: static; margin: 0; white-space: normal; }
     }
   </style>
 </head>
@@ -179,50 +201,27 @@
   
   <h2>Meet Emmi</h2>
   <div class="img-gallery">
-    <!-- Replace these src attributes with your actual image file names -->
-    <img src="emmi-1.jpg" alt="Emmi Picture 1">
-    <img src="emmi-2.jpg" alt="Emmi Picture 2">
-    <img src="emmi-3.jpg" alt="Emmi Picture 3">
-    <img src="emmi-4.jpg" alt="Emmi Picture 4">
-    <img src="emmi-5.jpg" alt="Emmi Picture 5">
-    <img src="emmi-6.jpg" alt="Emmi Picture 6">
-    <img src="emmi-7.jpg" alt="Emmi Picture 7">
-    <img src="emmi-8.jpg" alt="Emmi Picture 8">
-    <img src="emmi-9.jpg" alt="Emmi Picture 9">
-    <img src="emmi-10.jpg" alt="Emmi Picture 10">
-  </div>
-  
-  <!-- Existing Quote Section: Emmi Speaks -->
-  <div class="quote-section">
-    <h2>Emmi Speaks</h2>
-    <blockquote>"I didn't choose the nap life; the nap life chose me!"</blockquote>
-  </div>
-  
-  <!-- New Funny Section: Emmi's Diary -->
-  <div class="funny-section">
-    <h2>Emmi's Diary</h2>
-    <p><strong>Dear Diary:</strong> Today I knocked over a vase—though I swear it was the mischievous wind's fault! I demand extra treats as compensation.</p>
-  </div>
-  
-  <!-- New Funny Section: Kitty Confessions -->
-  <div class="funny-section">
-    <h2>Kitty Confessions</h2>
-    <ul>
-      <li>"I once locked myself in a closet—oops, discovered a new nap zone!"</li>
-      <li>"That red dot? My archenemy, yet I just can’t resist chasing it!"</li>
-      <li>"I pretend not to hear my name just to keep life mysterious."</li>
-    </ul>
+    <img src="thumbs/emmi-1.webp" alt="Emmi Picture 1" width="600" height="450" decoding="async">
+    <img src="thumbs/emmi-2.webp" alt="Emmi Picture 2" width="600" height="800" decoding="async">
+    <img src="thumbs/emmi-3.webp" alt="Emmi Picture 3" width="600" height="800" decoding="async">
+    <img src="thumbs/emmi-4.webp" alt="Emmi Picture 4" width="600" height="800" decoding="async">
+    <img src="thumbs/emmi-5.webp" alt="Emmi Picture 5" width="600" height="450" loading="lazy" decoding="async">
+    <img src="thumbs/emmi-6.webp" alt="Emmi Picture 6" width="600" height="800" loading="lazy" decoding="async">
+    <img src="thumbs/emmi-7.webp" alt="Emmi Picture 7" width="600" height="800" loading="lazy" decoding="async">
+    <img src="thumbs/emmi-8.webp" alt="Emmi Picture 8" width="600" height="800" loading="lazy" decoding="async">
+    <img src="thumbs/emmi-9.webp" alt="Emmi Picture 9" width="600" height="800" loading="lazy" decoding="async">
+    <img src="thumbs/emmi-10.webp" alt="Emmi Picture 10" width="600" height="800" loading="lazy" decoding="async">
   </div>
   
   <!-- Floating Emmi element (animated to move around the page) -->
-  <img src="emmi.png" class="floating-cat" alt="Floating Emmi">
+  <img src="thumbs/emmi-1.webp" class="floating-cat" alt="Floating Emmi" width="100" height="100" decoding="async">
   
   <!-- Extra animated funky shape for extra flair -->
   <div class="funky-shape"></div>
   
-  <div class="footer">
+  <footer class="footer">
     <p>&copy; 2025 Emmi. All rights reserved.</p>
-  </div>
+  </footer>
 </body>
 </html>
 
